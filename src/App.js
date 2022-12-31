@@ -5,11 +5,11 @@ import User from "./components/Users/User";
 function App() {
   const [userDetail, setUserDetail] = useState([]);
 
-  const addUserHandler = (uName, uAge) => {
+  const addUserHandler = (uName, uAge, cName) => {
     setUserDetail((prevUserDetails) => {
       return [
         ...prevUserDetails,
-        { name: uName, age: uAge, id: Math.random().toString() },
+        { name: uName, age: uAge, collegename: cName, id: Math.random().toString() },
       ];
     });
   };

@@ -6,18 +6,24 @@ import ErrorModal from "../UI/ErrorModal";
 import Wrapper from "../Helpers/Wrapper";
 
 const User = (props) => {
-  const nameInputRef = useRef()
-  const ageInputRef = useRef()
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+  const collegeInputRef = useRef();
   const [error, setError] = useState("");
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const enteredName = nameInputRef.current.value
-    const enteredUserAge = ageInputRef.current.value
-    if (enteredName.trim().length === 0 || enteredUserAge.trim().length === 0) {
+    const enteredName = nameInputRef.current.value;
+    const enteredUserAge = ageInputRef.current.value;
+    const enteredCollegeName = collegeInputRef.current.value;
+    if (
+      enteredName.trim().length === 0 ||
+      enteredUserAge.trim().length === 0 ||
+      enteredCollegeName.trim().length === 0
+    ) {
       setError({
         title: "Invalid input",
-        message: "Please enter a valid name and age (non-empty values).",
+        message: "Please enter a valid name, age and college name (non-empty values).",
       });
       return;
     }
@@ -29,7 +35,7 @@ const User = (props) => {
       return;
     }
 
-    props.onAddUser(enteredName, enteredUserAge);
+    props.onAddUser(enteredName, enteredUserAge, enteredCollegeName);
   };
 
   const errorHandler = () => {
@@ -47,18 +53,13 @@ const User = (props) => {
       <Card className={classes.input}>
         <form onSubmit={submitHandler}>
           <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            ref={nameInputRef}
-          />
+          <input id="username" type="text" ref={nameInputRef} />
 
           <label htmlFor="age">Age(Years)</label>
-          <input
-            id="age"
-            type="number"
-            ref={ageInputRef}
-          />
+          <input id="age" type="number" ref={ageInputRef} />
+
+          <label htmlFor="collegename">College Name</label>
+          <input id="collegename" type="text" ref={collegeInputRef} />
           <Button type="submit">Add User</Button>
         </form>
       </Card>
